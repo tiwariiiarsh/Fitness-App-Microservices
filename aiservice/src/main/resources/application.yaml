@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: AI-SERVICE
+  config:
+    import: optional:configserver:http://localhost:9999
+
+#  rabbitmq:
+#    # RabbitMQ server connection details
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+#
+#
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/FitnessRecommendation
+#      database: FitnessRecommendation
+#
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
+#
+#
+#server:
+#  port: 9090
+#
+#rabbitmq:
+#  exchange:
+#    # Exchange ka naam (producer yahin message bhejega)
+#    name: fitness.exchange
+#
+#  queue:
+#    # Queue ka naam (consumer yahin se message consume karega)
+#    name: activity.queue
+#
+#  routing:
+#    # Routing key (exchange → queue mapping ke liye)
+#    key: activity.tracking
+#
+#
+#gemini:
+#  api:
+#    url: ${GEMINI_API_URL}
+#    key: ${GEMINI_API_KEY}
