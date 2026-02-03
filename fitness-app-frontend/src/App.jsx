@@ -16,6 +16,7 @@ import { setCredentials } from "./slice/authSlice";
 import ActivityForm from "./components/ActivityForm";
 import ActivityList from "./components/ActivityList";
 import ActivityDetail from "./components/ActivityDetails";
+import { AuthCallback } from "react-oauth2-code-pkce";
 
 const ActivityPage = () => {
   return (
@@ -67,7 +68,8 @@ function App() {
           variant="contained"
           size="large"
           startIcon={<FitnessCenterIcon />}
-          onClick={logIn}
+          // onClick={logIn}
+          onClick={() => logIn()}   // 🔥 FIX
           sx={{
             px: 4,
             py: 1.5,
@@ -113,9 +115,10 @@ function App() {
       {/* 🔥 MAIN CONTENT */}
      <Container maxWidth="xl" sx={{ mt: 10 }}>
         <Routes>
+          <Route path="/callback" element={<AuthCallback />} />
+
           <Route path="/" element={<Navigate to="/activities" replace />} />
           <Route path="/activities" element={<ActivityPage />} />
-          
           <Route path="/activities/:id" element={<ActivityDetail />} />
         </Routes>
       </Container>

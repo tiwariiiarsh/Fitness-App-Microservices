@@ -18,7 +18,9 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class KeycloakUserSyncFilter implements WebFilter {
     private final UserService userService;
-
+//    ServerWebExchange--> Wrapper of HTTP request and response,1)Request → headers, path, query params, body,  2)Response → status, headers, body
+//Spring WebFlux non-blocking + reactive hai.
+//  1)  in Traditional Spring MVC:  void filter(...)  V/S  2)Reactive WebFlux:  Mono<Void> filter(...)  benifit:Thread block nahi hota, Request async way mein process hoti hai,  Better performance & scalability
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         String token = exchange.getRequest().getHeaders().getFirst("Authorization");
@@ -61,7 +63,7 @@ public class KeycloakUserSyncFilter implements WebFilter {
         try {
             String tokenWithoutBearer = token.replace("Bearer ", "").trim();
             SignedJWT signedJWT = SignedJWT.parse(tokenWithoutBearer);
-            JWTClaimsSet claims = signedJWT.getJWTClaimsSet();
+            JWTClaimsSet claims = signedJWT.getJWTClaimsSet(); //Token decode hota hai,  Uske claims (payload) mil jaate hain
 
             RegisterRequest registerRequest = new RegisterRequest();
             registerRequest.setEmail(claims.getStringClaim("email"));
